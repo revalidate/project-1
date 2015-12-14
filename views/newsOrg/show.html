@@ -8,14 +8,14 @@
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="http://localhost:3000/css/styles.css">
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="js/app.js"></script>
+    <script src="http://localhost:3000/js/app.js"></script>
   </head>
   <body>
       <div class="container header-bg">
@@ -23,12 +23,12 @@
         <nav class="navbar" role="navigation">
           <div class="container">
               <div class="navbar-header">
-                <a class="navbar-brand" href="#">REVA BHATT</a>
+                <a class="navbar-brand">REVA BHATT</a>
               </div>
               <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav pull-right">
                   <li><a href="/">HOME</a></li>
-                  <li><a href="/neworg">CREATE</a></li>
+                  <li><a href="/newsorgs/new">CREATE</a></li>
                   <li><a href="#about">SEARCH</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
@@ -44,15 +44,21 @@
       </div>
       
 
-      <div class="col-md-8 col-md-offset-2">
-        <div class="news-orgs-list">
-          <h2>CNN</h2>
-          <h4>Founded by Ted Turner</h4>
-          <h4><a href="http://www.cnn.com/">cnn.com/</a></h4>
-          <br>
-          <p>
-            CNN.com is among the worlds leaders in online news and information delivery. Staffed 24 hours, seven days a week by a dedicated staff in CNNs world headquarters in Atlanta, Georgia, and in bureaus worldwide, CNN.com relies heavily on CNNs global team of almost 4,000 news professionals. CNN.com features the latest multimedia technologies, from live video streaming to audio packages to searchable archives of news features and background information. The site is updated continuously throughout the day.</p>
-          <br>
+      <div class="col-md-8 col-md-offset-2" id="oneNewsOrg">
+        <div id="basicNews">
+          <!-- <div class="row newsorg" data-org-id='newsOrgs._id'>
+            <h2>CNN</h2>
+            <button class='btn-primary delete'>delete</button>
+            <button class='btn-primary'>edit</button>
+            <h4>Founded by Ted Turner</h4>
+            <h4><a href="http://www.cnn.com/">cnn.com/</a></h4>
+            <p>
+              CNN.com is among the worlds leaders in online news and information delivery. Staffed 24 hours, seven days a week by a dedicated staff in CNNs world headquarters in Atlanta, Georgia, and in bureaus worldwide, CNN.com relies heavily on CNNs global team of almost 4,000 news professionals. CNN.com features the latest multimedia technologies, from live video streaming to audio packages to searchable archives of news features and background information. The site is updated continuously throughout the day.</p>
+            <br>
+          </div> -->
+        </div>
+
+        <div class="row newsorg" data-org-id='newsOrgs._id'>
           <h4>User Reviews</h4>
             <div class="rating">
               <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>

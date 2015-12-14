@@ -29,11 +29,11 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/index.html');
 });
 
-app.get('/neworg', function homepage (req, res) {
+app.get('/newsorgs/new', function homepage (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/new.html');
 });
 
-app.get('/shownews', function homepage (req, res) {
+app.get('/newsorgs/:id', function homepage (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/show.html');
 });
 
@@ -47,6 +47,13 @@ app.get('/newreview', function homepage (req, res) {
 
 app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
   db.NewsOrg.find({}, function(err, newsorgs) {
+    if (err) {console.log(err);}
+    res.json(newsorgs);
+    });
+});
+
+app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
+  db.NewsOrg.findOne({_id: req.params.id}, function(err, newsorgs) {
     if (err) {console.log(err);}
     res.json(newsorgs);
     });
