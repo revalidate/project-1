@@ -28,6 +28,30 @@ newsOrgs.push({
              founder: 'Ted Turner',
              summary: 'CNN.com is among the worlds leaders in online news and information delivery. Staffed 24 hours, seven days a week by a dedicated staff in CNNs world headquarters in Atlanta, Georgia, and in bureaus worldwide, CNN.com relies heavily on CNNs global team of almost 4,000 news professionals. CNN.com features the latest multimedia technologies, from live video streaming to audio packages to searchable archives of news features and background information. The site is updated continuously throughout the day.'
            });
+newsOrgs.push({
+             name: 'Wall St. Journal',
+             url: 'http://www.wsj.com/',
+             founder: 'Charles H. Dow',
+             summary: 'The Wall Street Journal delivers news, analysis and insights to help you succeed. When you read The Wall Street Journal you become part of a global conversation about business, politics, technology and culture. You have access to the world through news coverage from more than 1,800 journalists in 45 countries and you join a community of more than 2.2 million subscribers in the U.S. and 31 million unique users per month worldwide as part of the Wall Street Journal Digital Network.'
+           });
+newsOrgs.push({
+             name: 'The Economist',
+             url: 'http://www.economist.com/',
+             founder: 'James Wilson',
+             summary: 'The Economist is an authoritative weekly newspaper focusing on international politics and business news and opinion. The Economist is one of the most widely recognised and well-read current affairs publications, with a growing global circulation of around 1.5m readers and a reputation for incisive analysis and opinion on every aspect of world events. '
+           });
+newsOrgs.push({
+             name: 'BBC',
+             url: 'http://www.bbc.co.uk/',
+             founder: 'John Charles Walsham Reith',
+             summary: 'The BBC is the world’s leading public service broadcaster. Funded primarily through the television licence fee, the BBC provides audiences in the UK with high quality and distinctive services across television, radio and online. In the UK the BBC provides 10 network television services, 10 network radio services, 46 radio services in the nations and regions of the UK, plus an extensive online presence. The BBC also delivers impartial news and information to audiences around the globe through the World Service.'
+           });
+newsOrgs.push({
+             name: 'The Huffington Post',
+             url: 'http://www.huffingtonpost.com/',
+             founder: 'Jonah Peretti, Andrew Breitbart, Arianna Huffington, and Kenneth Lerer',
+             summary: 'The Huffington Post has over 90 sections globally, covering politics, business, entertainment, environment, technology, media, lifestyle, culture, comedy, healthy living, womens interest, local news and so much more.'
+           });
 
 
 // // populate each albums song list
@@ -38,11 +62,11 @@ newsOrgs.push({
 
 db.NewsOrg.remove({}, function(err, success){
   console.log("deleted all data");
-  // db.NewsOrg.create(newsOrgs, function(err, newsOrgs){
-    // if (err) { return console.log('ERROR', err); }
-    // console.log("all news organizations:", newsOrgs);
-    // console.log("created", newsOrgs.length, "news organizations");
+  db.NewsOrg.create(newsOrgs, function(err, newsOrgs){
+    if (err) { return console.log('ERROR', err); }
+    console.log("all news organizations:", newsOrgs);
+    console.log("created", newsOrgs.length, "news organizations");
     process.exit();
-  // });
+  });
 
 });

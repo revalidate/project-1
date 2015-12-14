@@ -5,7 +5,7 @@ var NewsOrgSchema = new Schema({
   name: String,
   url: String,
   founder: String,
-  Summary: String
+  summary: String
 });
 
 var NewsOrg = mongoose.model('NewsOrg', NewsOrgSchema);

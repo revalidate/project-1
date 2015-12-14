@@ -45,11 +45,11 @@ app.get('/newreview', function homepage (req, res) {
  * JSON API Endpoints
  */
 
-app.get('/api/', function newsOrgs_Index(req, res) {
+app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
   db.NewsOrg.find({}, function(err, newsorgs) {
     if (err) {console.log(err);}
     res.json(newsorgs);
-  });
+    });
 });
 
 /**********
