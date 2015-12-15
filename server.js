@@ -53,10 +53,15 @@ app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
 });
 
 app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
+  if("new" === req.params.id){return;}
   db.NewsOrg.findOne({_id: req.params.id}, function(err, newsorgs) {
     if (err) {console.log(err);}
     res.json(newsorgs);
     });
+});
+
+app.post("/api/newsorgs", function newsOrgs_Create(req,res){
+  console.log("hello");
 });
 
 /**********
