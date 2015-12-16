@@ -14,7 +14,7 @@ newsOrgs.push({
              name: 'The Guardian',
              url: 'http://www.theguardian.com/us',
              founder: 'John Edward Taylor',
-             summary: 'Covering American and international news for an online, global audience. Our team of US-based journalists is most recently renowned for its Pulitzer Prize-winning revelations based on the disclosures made by whistleblower Edward Snowden'
+             summary: 'Covering American and international news for an online, global audience. Our team of US-based journalists is most recently renowned for its Pulitzer Prize-winning revelations based on the disclosures made by whistleblower Edward Snowden.'
            });
 newsOrgs.push({
              name: 'New York Times',
@@ -38,7 +38,7 @@ newsOrgs.push({
              name: 'The Economist',
              url: 'http://www.economist.com/',
              founder: 'James Wilson',
-             summary: 'The Economist is an authoritative weekly newspaper focusing on international politics and business news and opinion. The Economist is one of the most widely recognised and well-read current affairs publications, with a growing global circulation of around 1.5m readers and a reputation for incisive analysis and opinion on every aspect of world events. '
+             summary: 'The Economist is an authoritative weekly newspaper focusing on international politics and business news and opinion. The Economist is one of the most widely recognised and well-read current affairs publications, with a growing global circulation of around 1.5m readers and a reputation for incisive analysis and opinion on every aspect of world events.'
            });
 newsOrgs.push({
              name: 'BBC',
@@ -51,6 +51,12 @@ newsOrgs.push({
              url: 'http://www.huffingtonpost.com/',
              founder: 'Jonah Peretti, Andrew Breitbart, Arianna Huffington, and Kenneth Lerer',
              summary: 'The Huffington Post has over 90 sections globally, covering politics, business, entertainment, environment, technology, media, lifestyle, culture, comedy, healthy living, womens interest, local news and so much more.'
+           });
+newsOrgs.push({
+             name: 'VICE',
+             url: 'http://www.vice.com/',
+             founder: 'Suroosh Alvi, Shane Smith, and Gavin McInnes',
+             summary: 'VICE News is an international news organization created by and for a connected generation. We provide an unvarnished look at some of the most important events of our time, highlight under-reported stories from around the globe, and get to the heart of the matter with reporters who call it like they see it.'
            });
 
 

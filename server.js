@@ -61,7 +61,12 @@ app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
 });
 
 app.post("/api/newsorgs", function newsOrgs_Create(req,res){
-  console.log("hello");
+  console.log('body', req.body);
+  db.NewsOrg.create(req.body, function(err, newsOrg) {
+    if (err) { console.log('error', err); }
+    console.log(newsOrg);
+    res.json(newsOrg);
+  });
 });
 
 /**********
