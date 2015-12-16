@@ -56,7 +56,7 @@ newsOrgs.push({
              name: 'VICE',
              url: 'http://www.vice.com/',
              founder: 'Suroosh Alvi, Shane Smith, and Gavin McInnes',
-             summary: 'VICE News is an international news organization created by and for a connected generation. We provide an unvarnished look at some of the most important events of our time, highlight under-reported stories from around the globe, and get to the heart of the matter with reporters who call it like they see it.'
+             summary: 'VICE News is an international news organization created by and for a connected generation. We provide an unvarnished look at some of the most important events of our time, highlight under-reported stories from around the globe, and get to the heart of the matter with reporters who call it like they see it.',
            });
 
 

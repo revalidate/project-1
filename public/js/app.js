@@ -1,5 +1,7 @@
 //* CLIENT-SIDE JS
 
+review = {date: 1450298103794, score: 5, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."};
+
 $(document).ready(function() {
   console.log('app.js loaded!');
 
@@ -118,6 +120,9 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
+  // READ REVIEWS
+  renderReview(review);
+
 });
 
 
@@ -169,4 +174,25 @@ function renderMoreInfoOrg(newsOrgs) {
 "<!-- end one news org -->";
 
       $('#basicNews').append(moreInfoHtml);
+ }
+
+ function renderReview(review) {
+  console.log('more info on :', review);
+
+  var reviewHtml = 
+"    <!-- one review -->" +
+"    <div>" +
+"      <div class='user-review'>"+ review.date + "</div>" +
+"      <div class='user-review'>" + review.score + "</div>" +
+"      <div class='user-review'>" + review.comment + "</div>" +
+"      <br>" +
+"      <button class='btn-primary delete'>delete</button>" +
+"      <button class='btn-primary'>edit</button>" +
+"      <br>" +
+"    </div>" +
+"    <hr>" +
+"    <!-- end one review -->";
+
+
+      $('#allReviews').append(reviewHtml);
  }

@@ -34,8 +34,9 @@
 .user-review {
   display: inline-block;
   width: 200px;
-  height: 10px;
+  height: inherit;
   margin: 1em;
+  vertical-align: middle;
 }
 
 .btn-primary {
