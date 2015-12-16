@@ -60,7 +60,7 @@ app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
     });
 });
 
-app.post("/api/newsorgs", function newsOrgs_Create(req,res){
+app.post("/api/newsorgs", function newsOrg_Create(req,res){
   console.log('body', req.body);
   db.NewsOrg.create(req.body, function(err, newsOrg) {
     if (err) { console.log('error', err); }
@@ -69,12 +69,29 @@ app.post("/api/newsorgs", function newsOrgs_Create(req,res){
   });
 });
 
-app.delete('/api/newsorgs/:id', function deleteAlbum(req, res) {
+app.delete('/api/newsorgs/:id', function newsOrg_Delete(req, res) {
   console.log('deleting id: ', req.params.id);
   db.NewsOrg.remove({_id: req.params.id}, function(err) {
     if (err) { return console.log(err); }
     console.log("removal of id=" + req.params.id  + " successful.");
     res.status(200).send(); // everything is a-OK
+  });
+});
+
+app.put('/api/newsorgs/:id', function newsOrg_Update(req,res){
+  console.log("haiiiiiiiii");
+  var orgId = req.params.id;
+  db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
+    if (err) {console.log(err);}
+    newsorg.name = req.body.name;
+    newsorg.founder = req.body.founder;
+    newsorg.url = req.body.url;
+    newsorg.summary = req.body.summary;
+
+    newsorg.save(function(err,savedNewsOrg){
+      if (err) {console.log("saving error:", err);}
+      res.json(savedNewsOrg);
+    });
   });
 });
 
