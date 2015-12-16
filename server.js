@@ -69,6 +69,16 @@ app.post("/api/newsorgs", function newsOrgs_Create(req,res){
   });
 });
 
+app.delete('/api/newsorgs/:id', function deleteAlbum(req, res) {
+  console.log('deleting id: ', req.params.id);
+  db.NewsOrg.remove({_id: req.params.id}, function(err) {
+    if (err) { return console.log(err); }
+    console.log("removal of id=" + req.params.id  + " successful.");
+    res.status(200).send(); // everything is a-OK
+  });
+});
+
+
 /**********
  * SERVER *
  **********/

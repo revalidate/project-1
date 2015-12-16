@@ -63,19 +63,6 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-  // renderNewsOrg(newsOrgs[0]);
-  // newsOrgs.forEach(function(e){
-  //     renderNewsOrg(e);
-  // })
-  // $.ajax ({
-  //   method: "GET",
-  //   url: "/api/newsorgs",
-  //   success: function (data) {
-  //     data.forEach (function (e){
-  //       renderNewsOrg(e);
-  //     })
-  //   }
-  // })
 
   $.get('/api/newsorgs').success(function (newsOrgs) {
     // console.log("newsOrgs", newsOrgs);
@@ -83,21 +70,18 @@ $(document).ready(function() {
       renderNewsOrg(newsOrg);
     });
   });
-
-  // renderMoreInfoOrg(newsOrgs);
   
   var url = window.location.href.split("/");
-  var id = url[url.length-1];
-  var homepage = window.location.href;
+  var showId = url[url.length-1];
   // console.log(id);
 
-  $.get('/api/newsorgs/' + id).success(function (newsOrgs) {
+  $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
     // console.log("more info");
     renderMoreInfoOrg(newsOrgs);
   });
 
 
-// CREATE NEWS ORG
+// CREATE NEWS ORG AND REDIRECTS TO HOMEPAGE WITH NEW ORG
   $('#neworg-form form').on('submit', function(e) {
     e.preventDefault();
     var formData = $(this).serialize();
@@ -106,12 +90,22 @@ $(document).ready(function() {
       console.log('new news org after POST', newsorg);
       renderNewsOrg(newsorg);  //render the server's response
     });
-    // $(this).trigger("reset");
     window.location.href = "http://localhost:3000/";
   });
 
+
+// DELETES SPECIFIC NEWS ORG & REDIRECTS TO HOMEPAGE WITH DELETED ORG
   $("#basicNews").on('click', ".delete-newsorg", function(e) {
-    console.log("clicked delete");
+    console.log("delete this newsorg:", showId);
+    $.ajax({
+      method: 'DELETE',
+      url: ('/api/newsorgs/' + showId),
+      success: function() {
+        console.log("successfully deleted news org");
+        $('[data-org-id='+ showId + ']').remove();
+      }
+    });
+    window.location.href = "http://localhost:3000/";
   });
 
 });
