@@ -1,6 +1,26 @@
 //* CLIENT-SIDE JS
 
-review = {date: 1450298103794, score: 5, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."};
+// var newsOrgs = [];
+// newsOrgs.push({
+//              name: 'NPR',
+//              url: 'http://www.npr.org/',
+//              founder: 'Bill Siemering',
+//              summary: 'Great storytelling and rigorous reporting. These are the passions that fuel us. Our business is telling stories, small and large, that start conversations, increase understanding, enrich lives and enliven minds.',
+//              review: [
+//              {date: Date.now(), score: 3, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."},
+//              {date: Date.now(), score: 2, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."}
+//              ]
+//            });
+// newsOrgs.push({
+//              name: 'The Guardian',
+//              url: 'http://www.theguardian.com/us',
+//              founder: 'John Edward Taylor',
+//              summary: 'Covering American and international news for an online, global audience. Our team of US-based journalists is most recently renowned for its Pulitzer Prize-winning revelations based on the disclosures made by whistleblower Edward Snowden.',
+//              review: [
+//              {date: Date.now(), score: 4, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."},
+//              {date: Date.now(), score: 5, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."}
+//              ]
+//            });
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -120,13 +140,26 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
-  // READ REVIEWS
-  renderReview(review);
+//  READ REVIEWS
+  // newsOrgs.forEach (function (e){
+  //   var review = e.review;
+  //   review.forEach (function (l){
+  //     renderReview(l);
+  //   });
+  // });
+
+  $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
+    console.log("reivew for", newsOrgs);
+    var review = newsOrgs.review;
+    review.forEach(function(e){
+      renderReview(e);
+    });
+  });
 
 });
 
 
-// this function takes a single news org and renders it to the page
+// fumction to render single news org onto index.html, later called above
 function renderNewsOrg(newsOrgs) {
   // console.log('rendering news organization:', newsOrgs);
 
@@ -176,8 +209,9 @@ function renderMoreInfoOrg(newsOrgs) {
       $('#basicNews').append(moreInfoHtml);
  }
 
+
  function renderReview(review) {
-  console.log('more info on :', review);
+  // console.log('review for one org :', review);
 
   var reviewHtml = 
 "    <!-- one review -->" +
