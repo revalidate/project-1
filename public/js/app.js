@@ -140,6 +140,8 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
+
+  //READ all reviews and render to show.html page
   $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
     console.log("reivew for", newsOrgs);
     var review = newsOrgs.review;
@@ -148,11 +150,14 @@ $(document).ready(function() {
     });
   });
 
+
+  // CREATE "add review" button - pops up modal
   $('.new-review').on('click', function(e) {
     e.preventDefault();
     $('#reviewModal').modal();
   });
 
+  // CREATE new review on show.html page via modal on "save" button on modal
   $('#saveReview').on('click', function handleNewReviewSubmmit (e){
       var newScore = $('#score').val();
       var newComment = $('#comment').val();
@@ -161,22 +166,22 @@ $(document).ready(function() {
         score: newScore,
         comment: newComment
       };
-      console.log(formData);
 
       var postUrl = '/api/newsorgs/' + showId;
-      console.log(postUrl);
 
       $.post(postUrl, formData, function(review) {
         console.log('successfully posted review:', review);
         renderReview(review);
       });
+
+      // Hides Modal
       $('#reviewModal').modal('hide');
   });
 
 });
 
 
-// fumction to render single news org onto index.html, later called above
+// fumction renders single news org onto index.html, later called above
 function renderNewsOrg(newsOrgs) {
   // console.log('rendering news organization:', newsOrgs);
 
@@ -203,7 +208,7 @@ function renderNewsOrg(newsOrgs) {
  }
 
 
- // SHOW PAGE: this function takes a single news org and renders it on /:id
+ // function renders a single news org and renders it on show.html, later called above
 function renderMoreInfoOrg(newsOrgs) {
   // console.log('more info on :', newsOrgs.name);
 
@@ -227,6 +232,7 @@ function renderMoreInfoOrg(newsOrgs) {
  }
 
 
+// function renders a single review and renders it under "User Reviews" on show.html, later called above
  function renderReview(review) {
   // console.log('review for one org :', review);
 

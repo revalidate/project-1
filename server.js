@@ -31,16 +31,16 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/index.html');
 });
 
-app.get('/newsorgs/new', function homepage (req, res) {
+app.get('/newsorgs/new', function new_newsOrg (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/new.html');
 });
 
-app.get('/newsorgs/:id', function homepage (req, res) {
+app.get('/newsorgs/:id', function one_newsOrg (req, res) {
   res.sendFile(__dirname + '/views/newsOrg/show.html');
 });
 
-app.get('/newreview', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/newsOrg/reviews/new.html');
+app.get('/about', function about_page (req, res) {
+  res.sendFile(__dirname + '/views/about.html');
 });
 
 /*
