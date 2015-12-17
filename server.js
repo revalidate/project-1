@@ -94,25 +94,15 @@ app.delete('/api/newsorgs/:id', function newsOrg_Delete(req, res) {
 });
 
 app.put('/api/newsorgs/:id', function newsOrg_Update(req,res){
-  console.log("haiiiiiiiii");
+  console.log("oh snap, console.logs!");
   var orgId = req.params.id;
-  db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
+  // http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
+  db.NewsOrg.findByIdAndUpdate(orgId, req.body, function (err, newsorg){
     if (err) {
       console.log(err.message);
       return res.status(404).json({errors: [err.message]})
     }
-    newsorg.name = req.body.name;
-    newsorg.founder = req.body.founder;
-    newsorg.url = req.body.url;
-    newsorg.summary = req.body.summary;
-
-    newsorg.save(function(err,savedNewsOrg){
-      if (err) {
-        console.log(err.message);
-        return res.status(404).json({errors: [err.message]})
-      }
-      res.json(savedNewsOrg);
-    });
+    res.json(savedNewsOrg);
   });
 });
 
