@@ -66,6 +66,7 @@ $(document).ready(function() {
 
 // DELETES SPECIFIC NEWS ORG & REDIRECTS TO HOMEPAGE (index.html) WITH DELETED ORG
   $basicNewsEl.on('click', ".delete-newsorg", function(e) {
+    e.preventDefault(); // stop form submissions
     console.log("delete this newsorg:", showId);
     $.ajax({
       method: 'DELETE',
@@ -83,6 +84,7 @@ $(document).ready(function() {
 
 // UPDATE Edit Button
  $basicNewsEl.on('click', "#edit-newsorg", function(e) {
+    e.preventDefault(); // stop form submissions
     console.log("edit this newsorg:", showId);
 
     //Shows "Save Changes" Button & Hides "Edit" Button
@@ -105,22 +107,13 @@ $(document).ready(function() {
 // UPDATE Save Changes Button
   $basicNewsEl.on('click', "#save-newsorg", function(e) {
     console.log("save this newsorg:", showId);
+    e.preventDefault(); // stop form submissions
 
     //Shows "Edit" Button & Hides "Save Changes" Button
     $(this).parent().find('#edit-newsorg').toggle();
     $(this).toggle();
 
-    var name = $('#edit-name').val();
-    var founder = $('#edit-founder').val();
-    var url = $('#edit-url').val();
-    var summary = $('#edit-summary').val();
-
-    var formData = {
-      name: name,
-      url: url,
-      founder: founder,
-      summary: summary
-    };
+    var formData = $(this).parent("form").serialize();
 
     console.log(formData);
 
@@ -192,7 +185,7 @@ function renderNewsOrg(newsOrgs) {
   var newsOrgHtml =
 
 "<!-- one news org -->" +
-"        <div class='row newsorg' data-org-id='" + newsOrgs._id + "'>" +
+"        <form class='row newsorg' data-org-id='" + newsOrgs._id + "'>" +
 "          <h2>" + newsOrgs.name + "</h2>" +
 "          <h4>" + newsOrgs.founder + "</h4>" +
 "          <h4><a href='" + newsOrgs.url + "'</a>" + newsOrgs.url + "</a></h4>" +
@@ -204,7 +197,7 @@ function renderNewsOrg(newsOrgs) {
 "          <button class='btn-primary more-info'><a href='/newsorgs/" + newsOrgs._id + "'>more info</a></button>" +
 "          <br>" +
 "          <hr>" +
-"        </div>" +
+"        </form>" +
 "<!-- end one news org -->";
 
 
@@ -219,7 +212,7 @@ function renderMoreInfoOrg(newsOrgs) {
   var moreInfoHtml =
 
 "<!-- one news org -->" +
-"        <div class='row newsOrg' data-org-id='" + newsOrgs._id + "'>" +
+"        <form class='row newsOrg' data-org-id='" + newsOrgs._id + "'>" +
 "          <h2>" + newsOrgs.name + "</h2>" +
 "          <button class='btn-primary delete-newsorg'>delete</button>" +
 "          <button class='btn-primary' id='edit-newsorg'>edit</button>" +
@@ -229,7 +222,7 @@ function renderMoreInfoOrg(newsOrgs) {
 "          <br>" +
 "          <p>" + newsOrgs.summary + "</p>" +
 "          <br>" +
-"          </div>" +
+"          </form>" +
 "<!-- end one news org -->";
 
       $('#basicNews').append(moreInfoHtml);
