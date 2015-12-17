@@ -49,7 +49,10 @@ app.get('/about', function about_page (req, res) {
 
 app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
   db.NewsOrg.find({}, function(err, newsorgs) {
-    if (err) {console.log(err);}
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     res.json(newsorgs);
     });
 });
@@ -57,7 +60,10 @@ app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
 app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
   if("new" === req.params.id){return;}
   db.NewsOrg.findOne({_id: req.params.id}, function(err, newsorgs) {
-    if (err) {console.log(err);}
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     res.json(newsorgs);
     });
 });
@@ -65,7 +71,10 @@ app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
 app.post("/api/newsorgs", function newsOrg_Create(req,res){
   console.log('body', req.body);
   db.NewsOrg.create(req.body, function(err, newsOrg) {
-    if (err) { console.log('error', err); }
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     console.log(newsOrg);
     res.json(newsOrg);
   });
@@ -74,7 +83,10 @@ app.post("/api/newsorgs", function newsOrg_Create(req,res){
 app.delete('/api/newsorgs/:id', function newsOrg_Delete(req, res) {
   console.log('deleting id: ', req.params.id);
   db.NewsOrg.remove({_id: req.params.id}, function(err) {
-    if (err) { return console.log(err); }
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     console.log("removal of id=" + req.params.id  + " successful.");
     res.status(200).send(); // everything is a-OK
   });
@@ -84,14 +96,20 @@ app.put('/api/newsorgs/:id', function newsOrg_Update(req,res){
   console.log("haiiiiiiiii");
   var orgId = req.params.id;
   db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
-    if (err) {console.log(err);}
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     newsorg.name = req.body.name;
     newsorg.founder = req.body.founder;
     newsorg.url = req.body.url;
     newsorg.summary = req.body.summary;
 
     newsorg.save(function(err,savedNewsOrg){
-      if (err) {console.log("saving error:", err);}
+      if (err) {
+        console.log(err.message);
+        return res.status(404).json({errors: [err.message]})
+      }
       res.json(savedNewsOrg);
     });
   });
@@ -102,12 +120,18 @@ app.post("/api/newsorgs/:id", function review_Create(req,res){
   console.log("getting clientside post for new review");
   var orgId = req.params.id;
   db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
-    if (err) {console.log(err);}
+    if (err) {
+      console.log(err.message);
+      return res.status(404).json({errors: [err.message]})
+    }
     console.log(newsorg.review);
     var review = new db.Review(req.body);
     newsorg.review.push(review);
     newsorg.save(function(err, savedNewsOrg) {
-      if (err) { console.log('error', err); }
+      if (err) {
+        console.log(err.message);
+        return res.status(404).json({errors: [err.message]})
+      }
       console.log('news org with new review saved:', savedNewsOrg);
       res.json(review);
     });
