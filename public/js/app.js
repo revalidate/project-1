@@ -90,14 +90,15 @@ $(document).ready(function() {
     $(this).toggle();
 
     //Changes Name, Founder, Url, Summary into input boxes
-    var orgName = $('[data-org-id=' + showId + ']').find("h2").text();
-    var orgFounder = $('[data-org-id=' + showId + ']').find(".founder").text();
-    var orgUrl = $('[data-org-id=' + showId + ']').find(".url").text();
-    var orgSummary = $('[data-org-id=' + showId + ']').find("p").text();
-    $('[data-org-id=' + showId + ']').find("h2").html("<textarea id='edit-name' name='name'>" + orgName + "</textarea>");
-    $('[data-org-id=' + showId + ']').find(".founder").html("<textarea id='edit-founder' name='founder'>" + orgFounder + "</textarea>");
-    $('[data-org-id=' + showId + ']').find(".url").html("<textarea id='edit-url' name='url'>" + orgUrl + "</textarea>");
-    $('[data-org-id=' + showId + ']').find("p").html("<textarea class='form-control' id='edit-summary' name='summary'>" + orgSummary + "</textarea>");
+    var $org = $('[data-org-id=' + showId + ']');
+    var orgName = $org.find("h2").text();
+    var orgFounder = $org.find(".founder").text();
+    var orgUrl = $org.find(".url").text();
+    var orgSummary = $org.find("p").text();
+    $org.find("h2").html("<textarea id='edit-name' name='name'>" + orgName + "</textarea>");
+    $org.find(".founder").html("<textarea id='edit-founder' name='founder'>" + orgFounder + "</textarea>");
+    $org.find(".url").html("<textarea id='edit-url' name='url'>" + orgUrl + "</textarea>");
+    $org.find("p").html("<textarea class='form-control' id='edit-summary' name='summary'>" + orgSummary + "</textarea>");
   });
 
 
