@@ -7,11 +7,12 @@
 Below is an overview of my process and the tools I used to create my first full-stack web application.
 
 ##Technologies Used
-*MEAN stack sans Angular
-  *Nodejs
-  *Express
-  *Mongo
-  *JQuery
+<ul>MEAN stack sans Angular
+  <li>Nodejs</li>
+  <li>Express</li>
+  <li>Mongo</li>
+  <li>JQuery</li>
+</ul>
 
 *Express API built an Express Application that has both HTML and JSON API endpoints.
 
