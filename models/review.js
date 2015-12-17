@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ReviewSchema = new Schema({
-	date: Date,
+	date: { type: Date, default: Date.now },
 	score: Number,
 	comment: String
 });

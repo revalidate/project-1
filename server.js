@@ -6,6 +6,8 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var moment = require('moment');
+moment().format();
 
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
@@ -95,6 +97,23 @@ app.put('/api/newsorgs/:id', function newsOrg_Update(req,res){
   });
 });
 
+
+app.post("/api/newsorgs/:id", function review_Create(req,res){
+  console.log("getting clientside post for new review");
+  var orgId = req.params.id;
+  db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
+    if (err) {console.log(err);}
+    console.log(newsorg.review);
+    var review = new db.Review(req.body);
+    newsorg.review.push(review);
+    newsorg.save(function(err, savedNewsOrg) {
+      if (err) { console.log('error', err); }
+      console.log('news org with new review saved:', savedNewsOrg);
+      res.json(review);
+    });
+  });
+
+});
 
 /**********
  * SERVER *

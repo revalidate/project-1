@@ -140,20 +140,37 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
-//  READ REVIEWS
-  // newsOrgs.forEach (function (e){
-  //   var review = e.review;
-  //   review.forEach (function (l){
-  //     renderReview(l);
-  //   });
-  // });
-
   $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
     console.log("reivew for", newsOrgs);
     var review = newsOrgs.review;
     review.forEach(function(e){
       renderReview(e);
     });
+  });
+
+  $('.new-review').on('click', function(e) {
+    e.preventDefault();
+    $('#reviewModal').modal();
+  });
+
+  $('#saveReview').on('click', function handleNewReviewSubmmit (e){
+      var newScore = $('#score').val();
+      var newComment = $('#comment').val();
+
+      var formData = {
+        score: newScore,
+        comment: newComment
+      };
+      console.log(formData);
+
+      var postUrl = '/api/newsorgs/' + showId;
+      console.log(postUrl);
+
+      $.post(postUrl, formData, function(review) {
+        console.log('successfully posted review:', review);
+        renderReview(review);
+      });
+      $('#reviewModal').modal('hide');
   });
 
 });
@@ -215,13 +232,12 @@ function renderMoreInfoOrg(newsOrgs) {
 
   var reviewHtml = 
 "    <!-- one review -->" +
-"    <div>" +
-"      <div class='user-review'>"+ review.date + "</div>" +
+"    <div id='test' data-review-id='" + review._id + "'>" +
+"      <div class='user-review'>"+ moment(review.date).format("MMMM Do YYYY") + "</div>" +
 "      <div class='user-review'>" + review.score + "</div>" +
 "      <div class='user-review'>" + review.comment + "</div>" +
 "      <br>" +
-"      <button class='btn-primary delete'>delete</button>" +
-"      <button class='btn-primary'>edit</button>" +
+"      <button class='btn-primary delete'>delete review</button>" +
 "      <br>" +
 "    </div>" +
 "    <hr>" +

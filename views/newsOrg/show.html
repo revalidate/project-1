@@ -13,6 +13,7 @@
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="http://localhost:3000/js/app.js"></script>
@@ -49,7 +50,8 @@
         <!-- More News Organization Info -->
         </div>
 
-        <div class="row newsorg" data-org-id='newsOrgs._id'>
+        <div class="row newsorg">
+          <button class='btn-primary new-review'>add new review</button>          
           <h4>User Reviews</h4>
             <div class="rating">
               <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
@@ -57,6 +59,9 @@
             <br>
             
             <div id="allReviews">
+              <div class="user-review"><b><u>Date</u></b></div>
+              <div class="user-review"><b><u>Score</u></b></div>
+              <div class="user-review"><b><u>Comment</u></b></div>
 <!--               <div>
                 <div class="user-review">Date</div>
                 <div class="user-review">4</div>
@@ -82,6 +87,46 @@
 
         </div>
       </div>
+
+      <!-- begin reviewModal: this is not visible until you call .modal() on it -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="reviewModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add New Review</h4>
+          </div>
+          <div class="modal-body">
+            <fieldset class='form-horizontal'>
+
+            <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="score">Score</label>
+                <div class="col-md-4">
+                <input id="score" name="score" type="number" placeholder="0-5" min="0" max="5" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="comment">Comment</label>
+                <div class="col-md-4">
+                <input id="comment" name="comment" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+              </div>
+
+            </fieldset>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveReview">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
   </body>
