@@ -25,6 +25,9 @@
 $(document).ready(function() {
   console.log('app.js loaded!');
 
+  // select elements with jQuery only once
+  var $basicNewsEl = $("#basicNews");
+
 // READS DATABASE AND RENDERS TO HOMEPAGE (index.html)
   $.get('/api/newsorgs').success(function (newsOrgs) {
     // console.log("newsOrgs", newsOrgs);
@@ -62,7 +65,7 @@ $(document).ready(function() {
 
 
 // DELETES SPECIFIC NEWS ORG & REDIRECTS TO HOMEPAGE (index.html) WITH DELETED ORG
-  $("#basicNews").on('click', ".delete-newsorg", function(e) {
+  $basicNewsEl.on('click', ".delete-newsorg", function(e) {
     console.log("delete this newsorg:", showId);
     $.ajax({
       method: 'DELETE',
@@ -79,7 +82,7 @@ $(document).ready(function() {
 
 
 // UPDATE Edit Button
- $("#basicNews").on('click', "#edit-newsorg", function(e) {
+ $basicNewsEl.on('click', "#edit-newsorg", function(e) {
     console.log("edit this newsorg:", showId);
 
     //Shows "Save Changes" Button & Hides "Edit" Button
@@ -99,7 +102,7 @@ $(document).ready(function() {
 
 
 // UPDATE Save Changes Button
-  $("#basicNews").on('click', "#save-newsorg", function(e) {
+  $basicNewsEl.on('click', "#save-newsorg", function(e) {
     console.log("save this newsorg:", showId);
 
     //Shows "Edit" Button & Hides "Save Changes" Button
