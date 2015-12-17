@@ -81,11 +81,11 @@ $(document).ready(function() {
 // UPDATE Edit Button
  $("#basicNews").on('click', "#edit-newsorg", function(e) {
     console.log("edit this newsorg:", showId);
-    
+
     //Shows "Save Changes" Button & Hides "Edit" Button
     $(this).parent().find('#save-newsorg').toggle();
     $(this).toggle();
-    
+
     //Changes Name, Founder, Url, Summary into input boxes
     var orgName = $('[data-org-id=' + showId + ']').find("h2").text();
     var orgFounder = $('[data-org-id=' + showId + ']').find(".founder").text();
@@ -98,10 +98,10 @@ $(document).ready(function() {
   });
 
 
-// UPDATE Save Changes Button 
+// UPDATE Save Changes Button
   $("#basicNews").on('click', "#save-newsorg", function(e) {
     console.log("save this newsorg:", showId);
-    
+
     //Shows "Edit" Button & Hides "Save Changes" Button
     $(this).parent().find('#edit-newsorg').toggle();
     $(this).toggle();
@@ -225,7 +225,7 @@ function renderMoreInfoOrg(newsOrgs) {
 "          <br>" +
 "          <p>" + newsOrgs.summary + "</p>" +
 "          <br>" +
-"          </div>" + 
+"          </div>" +
 "<!-- end one news org -->";
 
       $('#basicNews').append(moreInfoHtml);
@@ -236,7 +236,7 @@ function renderMoreInfoOrg(newsOrgs) {
  function renderReview(review) {
   // console.log('review for one org :', review);
 
-  var reviewHtml = 
+  var reviewHtml =
 "    <!-- one review -->" +
 "    <div id='test' data-review-id='" + review._id + "'>" +
 "      <div class='user-review'>"+ moment(review.date).format("MMMM Do YYYY") + "</div>" +
