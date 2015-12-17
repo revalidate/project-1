@@ -243,8 +243,6 @@ function renderMoreInfoOrg(newsOrgs) {
 "      <div class='user-review'>" + review.score + "</div>" +
 "      <div class='user-review'>" + review.comment + "</div>" +
 "      <br>" +
-"      <button class='btn-primary delete'>delete review</button>" +
-"      <br>" +
 "    </div>" +
 "    <hr>" +
 "    <!-- end one review -->";
