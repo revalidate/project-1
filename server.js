@@ -82,7 +82,8 @@ app.post("/api/newsorgs", function newsOrg_Create(req,res){
 
 app.delete('/api/newsorgs/:id', function newsOrg_Delete(req, res) {
   console.log('deleting id: ', req.params.id);
-  db.NewsOrg.remove({_id: req.params.id}, function(err) {
+  // http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
+  db.NewsOrg.findByIdAndRemove(req.params.id, function(err) {
     if (err) {
       console.log(err.message);
       return res.status(404).json({errors: [err.message]})
