@@ -57,3 +57,12 @@ a {
 .about {
   height: 600px;
 }
+
+.btn-primary:hover {
+    background-color: #D4B4A6;
+    color: white;
+}
+
+a:hover {
+  color: white;
+}

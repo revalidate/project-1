@@ -1,52 +1,43 @@
 //* CLIENT-SIDE JS
 
-// var newsOrgs = [];
-// newsOrgs.push({
-//              name: 'NPR',
-//              url: 'http://www.npr.org/',
-//              founder: 'Bill Siemering',
-//              summary: 'Great storytelling and rigorous reporting. These are the passions that fuel us. Our business is telling stories, small and large, that start conversations, increase understanding, enrich lives and enliven minds.',
-//              review: [
-//              {date: Date.now(), score: 3, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."},
-//              {date: Date.now(), score: 2, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."}
-//              ]
-//            });
-// newsOrgs.push({
-//              name: 'The Guardian',
-//              url: 'http://www.theguardian.com/us',
-//              founder: 'John Edward Taylor',
-//              summary: 'Covering American and international news for an online, global audience. Our team of US-based journalists is most recently renowned for its Pulitzer Prize-winning revelations based on the disclosures made by whistleblower Edward Snowden.',
-//              review: [
-//              {date: Date.now(), score: 4, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."},
-//              {date: Date.now(), score: 5, comment: "woke news, they make an effort to educate on subjects that bring a positive impact on the reader rather than fear based reporting."}
-//              ]
-//            });
-
 $(document).ready(function() {
   console.log('app.js loaded!');
 
-// READS DATABASE AND RENDERS TO HOMEPAGE (index.html)
-  $.get('/api/newsorgs').success(function (newsOrgs) {
-    // console.log("newsOrgs", newsOrgs);
-    newsOrgs.forEach(function(newsOrg) {
-      renderNewsOrg(newsOrg);
-    });
-  });
+  // Only runs AJAX function if #newsOrgs exists on page
+  if ($("#newsOrgs").length > 0) {
 
+    // READS DATABASE AND RENDERS TO HOMEPAGE (index.html)
+      $.get('/api/newsorgs').success(function (newsOrgs) {
+        // console.log("newsOrgs", newsOrgs);
+        newsOrgs.forEach(function(newsOrg) {
+          renderNewsOrg(newsOrg);
+        });
+      });
 
-// showId = the unique id inside the html endpoint of specific news org (show.html page)
+  }
+
+  // showId = the unique id inside the html endpoint of specific news org (show.html page)
   var url = window.location.href.split("/");
   var showId = url[url.length-1];
-  // console.log(id);
 
-// READS DATABASE AND RENDERS TO UNIQUE NEWS ORG TO (show.html) ON "MORE INFO" BUTTON ON (index.html)
-  $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
-    // console.log("more info");
-    renderMoreInfoOrg(newsOrgs);
-  });
+  // Only runs AJAX function if #basicNews exists on page
+  if ($("#basicNews").length > 0 ) {
+    
+    // READS DATABASE AND RENDERS TO UNIQUE NEWS ORG TO (show.html) ON "MORE INFO" BUTTON ON (index.html)
+    $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
+      // console.log("more info");
+      renderMoreInfoOrg(newsOrgs);
 
+      //READS all reviews and render to show.html page
+      console.log("reivew for", newsOrgs);
+      var review = newsOrgs.review;
+      review.forEach(function(e){
+        renderReview(e);
+      });
+    });
+  }
 
-// CREATE NEWS ORG AND REDIRECTS TO HOMEPAGE (index.html) WITH NEW ORG
+  // CREATE NEWS ORG AND REDIRECTS TO HOMEPAGE (index.html) WITH NEW ORG
   $('#neworg-form form').on('submit', function(e) {
     e.preventDefault();
     var formData = $(this).serialize();
@@ -60,8 +51,7 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
-
-// DELETES SPECIFIC NEWS ORG & REDIRECTS TO HOMEPAGE (index.html) WITH DELETED ORG
+  // DELETES SPECIFIC NEWS ORG & REDIRECTS TO HOMEPAGE (index.html) WITH DELETED ORG
   $("#basicNews").on('click', ".delete-newsorg", function(e) {
     console.log("delete this newsorg:", showId);
     $.ajax({
@@ -77,8 +67,7 @@ $(document).ready(function() {
     window.location.href = "http://localhost:3000/";
   });
 
-
-// UPDATE Edit Button
+  // UPDATE Edit Button
  $("#basicNews").on('click', "#edit-newsorg", function(e) {
     console.log("edit this newsorg:", showId);
     
@@ -98,7 +87,7 @@ $(document).ready(function() {
   });
 
 
-// UPDATE Save Changes Button 
+  // UPDATE Save Changes Button 
   $("#basicNews").on('click', "#save-newsorg", function(e) {
     console.log("save this newsorg:", showId);
     
@@ -141,16 +130,6 @@ $(document).ready(function() {
   });
 
 
-  //READ all reviews and render to show.html page
-  $.get('/api/newsorgs/' + showId).success(function (newsOrgs) {
-    console.log("reivew for", newsOrgs);
-    var review = newsOrgs.review;
-    review.forEach(function(e){
-      renderReview(e);
-    });
-  });
-
-
   // CREATE "add review" button - pops up modal
   $('.new-review').on('click', function(e) {
     e.preventDefault();
@@ -190,7 +169,7 @@ function renderNewsOrg(newsOrgs) {
 "<!-- one news org -->" +
 "        <div class='row newsorg' data-org-id='" + newsOrgs._id + "'>" +
 "          <h2>" + newsOrgs.name + "</h2>" +
-"          <h4>" + newsOrgs.founder + "</h4>" +
+"          <h4>Founded by " + newsOrgs.founder + "</h4>" +
 "          <h4><a href='" + newsOrgs.url + "'</a>" + newsOrgs.url + "</a></h4>" +
 "          <div class='rating'>" +
 "              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>" +
@@ -220,7 +199,7 @@ function renderMoreInfoOrg(newsOrgs) {
 "          <button class='btn-primary delete-newsorg'>delete</button>" +
 "          <button class='btn-primary' id='edit-newsorg'>edit</button>" +
 "          <button hidden class='btn-primary' id='save-newsorg'>save changes</button>" +
-"          <h4 class='founder'>" + newsOrgs.founder + "</h4>" +
+"          <h4 class='founder'>Founded by " + newsOrgs.founder + "</h4>" +
 "          <h4 class='url'><a href='" + newsOrgs.url + "'</a>" + newsOrgs.url + "</a></h4>" +
 "          <br>" +
 "          <p>" + newsOrgs.summary + "</p>" +

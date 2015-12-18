@@ -55,7 +55,6 @@ app.get('/api/newsorgs', function newsOrgs_Index(req, res) {
 });
 
 app.get('/api/newsorgs/:id', function moreInfo_Index(req, res) {
-  if("new" === req.params.id){return;}
   db.NewsOrg.findOne({_id: req.params.id}, function(err, newsorgs) {
     if (err) {console.log(err);}
     res.json(newsorgs);
@@ -81,7 +80,7 @@ app.delete('/api/newsorgs/:id', function newsOrg_Delete(req, res) {
 });
 
 app.put('/api/newsorgs/:id', function newsOrg_Update(req,res){
-  console.log("haiiiiiiiii");
+  console.log("getting clientside put to update review");
   var orgId = req.params.id;
   db.NewsOrg.findOne({_id: orgId}, function (err, newsorg){
     if (err) {console.log(err);}
