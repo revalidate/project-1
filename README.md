@@ -72,3 +72,5 @@ This application is already deployed on heroku [here](https://young-oasis-4527.h
 * **Search Bar** on the home page above all the news organizations so a user can type in any news organization's name and it will populate the page with only relevant organizations.
 
 * **Funding Model** would be an additional resource for users to see what each news organizations source of revenue is. Ideally would love to create d3 data visualizations for this Model. 
+
+* **Overall Review** would calculate the average score of all the user reviews and illustrate that number on the 5 stars above the user reviews.
